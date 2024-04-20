@@ -13,6 +13,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Models/Client.h \
+    Models/WorkingWithServer.h \
     mainwindow.h
 
 FORMS += \
