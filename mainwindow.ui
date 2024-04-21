@@ -86,7 +86,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
-             <widget class="QPushButton" name="pushButton_4">
+             <widget class="QPushButton" name="transferToServer">
               <property name="text">
                <string>Передать</string>
               </property>
@@ -117,7 +117,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="textEdit"/>
+           <widget class="QTextEdit" name="clientView"/>
           </item>
          </layout>
         </item>
@@ -131,7 +131,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="textEdit_2"/>
+           <widget class="QTextBrowser" name="textBrowser"/>
           </item>
          </layout>
         </item>
