@@ -12,7 +12,7 @@ public:
     Server();
     QTcpSocket *socket;
     bool flag;
-    QString path;
+    QString path = "/";
     quint16 nextBlockSize;
     QDir prevDir;
     void SendToClient(QStringList subdirs);

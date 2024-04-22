@@ -20,13 +20,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QComboBox" name="listDirectory">
-          <item>
-           <property name="text">
-            <string>/</string>
-           </property>
-          </item>
-         </widget>
+         <widget class="QComboBox" name="listDirectory"/>
         </item>
         <item>
          <widget class="QListWidget" name="listWidget"/>

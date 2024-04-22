@@ -30,7 +30,6 @@ void MainWindow::on_transferToServer_clicked()
 
 void MainWindow::on_connection_clicked()
 {
-    server.path = "";
     client.SetAddress(ui->IPText->text());
     client.ConnectServer();
 }
@@ -38,7 +37,10 @@ void MainWindow::on_connection_clicked()
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-    qWarning() << item->text();
+    ui->clientView->append("Отправил данные");
+    ui->listDirectory->setItemText(0,ui->listDirectory->itemText(0)+item->text());
+    ui->serverView->append("Принял данные");
+    qWarning() << server.path;
     client.SendServer(item->text());
 }
 

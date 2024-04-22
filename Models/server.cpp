@@ -31,7 +31,6 @@ void Server::SlotReadyRead(){
             }
             QString str;
             in >> str;
-            path = path + "/" + str;
             QDir directory(path);
             nextBlockSize = 0;
             SendToClient(directory.entryList(QDir::Dirs | QDir::Files));

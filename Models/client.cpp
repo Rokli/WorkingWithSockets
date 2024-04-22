@@ -13,6 +13,7 @@ void Client::SetAddress(QString address){
 }
 void Client::ConnectServer(){
     socket->connectToHost(address,5000);
+    ui->listDirectory->addItem("/");
     if (socket->state() == QAbstractSocket::ConnectedState) {
         ui->clientView->append("Успешно подключение");
     }else{
@@ -40,7 +41,7 @@ void Client::ReadyRead(){
             QStringList subdirs;
             in >> subdirs;
             for (const QString &subdir : subdirs) {
-                qWarning() << subdir;
+                // qWarning() << subdir;
                 ui->listWidget->addItem(subdir);
             }
             nextBlockSize = 0;
