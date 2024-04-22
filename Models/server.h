@@ -14,7 +14,7 @@ public:
     bool flag;
     QString path = "/";
     quint16 nextBlockSize;
-    QDir prevDir;
+    QDir directory;
     void SendToClient(QStringList subdirs);
     void OffServer();
 private:

@@ -1,5 +1,6 @@
 #include "server.h"
 Server::Server(){
+    directory.cd(path);
     if(this->listen(QHostAddress::Any,5000)){
         flag = true;
     }else{
@@ -31,8 +32,8 @@ void Server::SlotReadyRead(){
             }
             QString str;
             in >> str;
-            QDir directory(path);
             nextBlockSize = 0;
+            directory.cd(str);
             SendToClient(directory.entryList(QDir::Dirs | QDir::Files));
             break;
         }

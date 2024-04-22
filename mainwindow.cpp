@@ -38,7 +38,16 @@ void MainWindow::on_connection_clicked()
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     ui->clientView->append("Отправил данные");
-    ui->listDirectory->setItemText(0,ui->listDirectory->itemText(0)+item->text());
+    ui->listDirectory->setItemText(0,server.directory.absoluteFilePath(item->text()));
+    QString ss = server.directory.absoluteFilePath(item->text());
+    if(item->text().contains("txt")){
+        QFile file(ss);
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        QTextStream in(&file);
+        QString fileContent = in.readAll();
+        ui->clientView->append(fileContent);
+        file.close();
+    }
     ui->serverView->append("Принял данные");
     qWarning() << server.path;
     client.SendServer(item->text());
