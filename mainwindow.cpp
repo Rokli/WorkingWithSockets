@@ -40,3 +40,10 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     client.SendServer(item->text());
 }
 
+
+void MainWindow::on_serverDisconnect_2_clicked()
+{
+    ui->clientView->append("Произошло рассоединение");
+    client.CloseConnection();
+}
+

@@ -14,9 +14,9 @@ void Client::SetAddress(QString address){
 void Client::ConnectServer(){
     socket->connectToHost(address,5000);
     if (socket->state() == QAbstractSocket::ConnectedState) {
-        ui->serverView->append("Успешно подключение");
+        ui->clientView->append("Успешно подключение");
     }else{
-       ui->serverView->append("Произошла ошибка во время подключения");
+       ui->clientView->append("Произошла ошибка во время подключения");
     }
 }
 void Client::ChangeDirectory(QString directory){

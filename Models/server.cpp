@@ -1,10 +1,9 @@
 #include "server.h"
 Server::Server(){
     if(this->listen(QHostAddress::Any,5000)){
-        qWarning() << "Сервер включен";
         flag = true;
     }else{
-        qWarning() << "Сервер не включился";
+        flag = false;
     }
 }
 void Server::incomingConnection(qintptr socketDescriptor){
@@ -39,7 +38,6 @@ void Server::SendToClient(QStringList subdirs){
     data.clear();
     QDataStream out(&data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_2);
-    // out << str;
     out << subdirs;
     for(int i = 0; i < sockets.size();i++){
         sockets[i]->write(data);

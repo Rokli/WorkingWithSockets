@@ -26,6 +26,8 @@ private slots:
 
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_serverDisconnect_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Client client;
