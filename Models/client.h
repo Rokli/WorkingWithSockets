@@ -24,7 +24,7 @@ private:
     QString address;
     QString directory;
 public slots:
-    void SetAddress(QString address);
+    bool SetAddress(QString address);
     void ConnectServer();
     void ChangeDirectory(QString directory);
     void SendServer(QString str);

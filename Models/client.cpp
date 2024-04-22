@@ -8,17 +8,21 @@ Client::Client(){
 void Client::SetUI(Ui::MainWindow *ui){
        this->ui = ui;
 }
-void Client::SetAddress(QString address){
-    this->address = address;
+bool Client::SetAddress(QString address){
+    QRegularExpression ipRegex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+
+    if(ipRegex.match(address).hasMatch()){
+        this->address = address;
+        return true;
+    }else{
+        ui->clientView->append("Неправильный IP-адрес");
+        return false;
+    }
 }
 void Client::ConnectServer(){
     socket->connectToHost(address,5000);
     ui->listDirectory->addItem("/");
-    if (socket->state() == QAbstractSocket::ConnectedState) {
-        ui->clientView->append("Успешно подключение");
-    }else{
-       ui->clientView->append("Произошла ошибка во время подключения");
-    }
+    ui->clientView->append("Успешно подключение");
 }
 void Client::ChangeDirectory(QString directory){
     this->directory = directory;

@@ -22,22 +22,25 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_transferToServer_clicked()
 {
-    ui->clientView->append("Отправил данные");
+    ui->clientView->append("Клиент получил\t" + QTime::currentTime().toString());
     client.SendServer(ui->listDirectory->currentText());
-    ui->serverView->append("Принял данные");
+    ui->serverView->append("Сервер получил\t"+ QTime::currentTime().toString());
 }
 
 
 void MainWindow::on_connection_clicked()
 {
-    client.SetAddress(ui->IPText->text());
-    client.ConnectServer();
+    if(client.SetAddress(ui->IPText->text())){
+        client.ConnectServer();
+        ui->connection->hide();
+    }
+
 }
 
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-    ui->clientView->append("Отправил данные");
+    ui->clientView->append("Клиент получил\t" + QTime::currentTime().toString());
     ui->listDirectory->setItemText(0,server.directory.absoluteFilePath(item->text()));
     QString ss = server.directory.absoluteFilePath(item->text());
     if(item->text().contains("txt")){
@@ -48,7 +51,7 @@ void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
         ui->clientView->append(fileContent);
         file.close();
     }
-    ui->serverView->append("Принял данные");
+    ui->serverView->append("Сервер получил\t"+ QTime::currentTime().toString());
     qWarning() << server.path;
     client.SendServer(item->text());
 }
@@ -58,6 +61,7 @@ void MainWindow::on_serverDisconnect_2_clicked()
 {
     ui->clientView->append("Произошло рассоединение");
     client.CloseConnection();
+    ui->connection->show();
 }
 
 
