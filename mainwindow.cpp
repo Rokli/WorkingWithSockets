@@ -47,3 +47,9 @@ void MainWindow::on_serverDisconnect_2_clicked()
     client.CloseConnection();
 }
 
+
+void MainWindow::on_exit_clicked()
+{
+    QApplication::exit();
+}
+

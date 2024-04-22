@@ -28,6 +28,8 @@ private slots:
 
     void on_serverDisconnect_2_clicked();
 
+    void on_exit_clicked();
+
 private:
     Ui::MainWindow *ui;
     Client client;
