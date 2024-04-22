@@ -92,7 +92,7 @@
             <item>
              <widget class="QPushButton" name="transferToServer">
               <property name="text">
-               <string>Передать</string>
+               <string>Передать серверу</string>
               </property>
              </widget>
             </item>

@@ -4,7 +4,6 @@ Client::Client(){
     socket = new QTcpSocket();
     connect(socket, &QTcpSocket::readyRead, this, &Client::ReadyRead);
     nextBlockSize = 0;
-    // connect(socket,&QTcpSocket::disconnected,socket,&QTcpSocket::deleteLater);
 }
 void Client::SetUI(Ui::MainWindow *ui){
        this->ui = ui;
@@ -28,12 +27,6 @@ void Client::ReadyRead(){
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_6_2);
     if(in.status() == QDataStream::Ok){
-        // QStringList subdirs;
-        // in >> subdirs;
-        // for (const QString &subdir : subdirs) {
-        //     qWarning() << subdir;
-        //     ui->listWidget->addItem(subdir);
-        // }
         for(;;){
             if(nextBlockSize == 0){
                 if(socket->bytesAvailable() < 2){
@@ -66,8 +59,6 @@ void Client::SendServer(QString str){
     out << quint16(data.size()-sizeof(quint16));
     socket->write(data);
 }
-//TODO:
-//Сделать закрытие связи  между сервером и клиентом
 void Client::CloseConnection(){
     ui->listWidget->clear();
     socket->disconnectFromHost();

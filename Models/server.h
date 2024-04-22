@@ -14,10 +14,12 @@ public:
     bool flag;
     QString path;
     quint16 nextBlockSize;
+    QDir prevDir;
+    void SendToClient(QStringList subdirs);
+    void OffServer();
 private:
     QVector<QTcpSocket*> sockets;
     QByteArray data;
-    void SendToClient(QStringList subdirs);
 public slots:
     void incomingConnection(qintptr socketDescriptor)override;
     void SlotReadyRead();

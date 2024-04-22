@@ -30,6 +30,10 @@ private slots:
 
     void on_exit_clicked();
 
+    void on_transferToClient_clicked();
+
+    void on_serverOff_clicked();
+
 private:
     Ui::MainWindow *ui;
     Client client;

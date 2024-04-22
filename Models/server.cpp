@@ -11,7 +11,6 @@ void Server::incomingConnection(qintptr socketDescriptor){
     socket = new QTcpSocket;
     socket->setSocketDescriptor(socketDescriptor);
     connect(socket, &QTcpSocket::readyRead, this, &Server::SlotReadyRead);
-    // connect(socket,&QTcpSocket::disconnected,socket,&QTcpSocket::deleteLater);
     sockets.push_back(socket);
     qWarning()<<"client connected";
 }
@@ -20,16 +19,6 @@ void Server::SlotReadyRead(){
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_6_2);
     if(in.status() == QDataStream::Ok){
-        // qWarning() << "read...";
-        // QString str;
-        // in >> str;
-        // qWarning() << str;
-        // path = path + "/" + str;
-        // QDir directory(path);
-        // // for (const QString &subdir : subdirs) {
-        // //     qWarning() << subdir;
-        // // }
-        // SendToClient(directory.entryList(QDir::Dirs | QDir::Files));
         for(;;){
             if(nextBlockSize == 0){
                 if(socket->bytesAvailable() < 2){
@@ -63,5 +52,7 @@ void Server::SendToClient(QStringList subdirs){
     for(int i = 0; i < sockets.size();i++){
         sockets[i]->write(data);
     }
-
+}
+void Server::OffServer(){
+    this->disconnect();
 }

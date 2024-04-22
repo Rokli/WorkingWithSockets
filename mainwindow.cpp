@@ -22,7 +22,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_transferToServer_clicked()
 {
+    ui->clientView->append("Отправил данные");
     client.SendServer(ui->listDirectory->currentText());
+    ui->serverView->append("Принял данные");
 }
 
 
@@ -51,5 +53,18 @@ void MainWindow::on_serverDisconnect_2_clicked()
 void MainWindow::on_exit_clicked()
 {
     QApplication::exit();
+}
+
+
+void MainWindow::on_transferToClient_clicked()
+{
+    // server.SendToClient(server.prevDir.entryList(QDir::Dirs | QDir::Files));
+}
+
+
+void MainWindow::on_serverOff_clicked()
+{
+    ui->serverView->append("Сервер отключен");
+    server.OffServer();
 }
 
