@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include <Models/server.h>
+#include <Models/client.h>
 #include <QTcpServer>
 #include <QTcpSocket>
 QT_BEGIN_NAMESPACE
@@ -19,17 +20,15 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_2_clicked();
-
     void on_transferToServer_clicked();
+
+    void on_connection_clicked();
+
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
-    QTcpSocket *socket;
-    QByteArray data;
+    Client client;
     Server server;
-public slots:
-    void SlotsReadyRead();
-    void SendToServer(QString str);
 };
 #endif // MAINWINDOW_H

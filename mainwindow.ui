@@ -20,16 +20,16 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QComboBox" name="comboBox">
+         <widget class="QComboBox" name="listDirectory">
           <item>
            <property name="text">
-            <string>ап</string>
+            <string>/</string>
            </property>
           </item>
          </widget>
         </item>
         <item>
-         <widget class="QListView" name="listView"/>
+         <widget class="QListWidget" name="listWidget"/>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -45,12 +45,16 @@
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit"/>
+               <widget class="QLineEdit" name="IPText">
+                <property name="text">
+                 <string>127.0.0.1</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="serverDisconnect">
+             <widget class="QPushButton" name="serverOff">
               <property name="text">
                <string>Сервер отключить</string>
               </property>
@@ -61,23 +65,23 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="connection">
               <property name="text">
                <string>Соединиться</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="serverDisconnect_2">
               <property name="text">
                <string>Отключиться</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_3">
+             <widget class="QPushButton" name="exit">
               <property name="text">
-               <string>Exit</string>
+               <string>Выход</string>
               </property>
              </widget>
             </item>
@@ -93,7 +97,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_5">
+             <widget class="QPushButton" name="transferToClient">
               <property name="text">
                <string>Передать клиенту</string>
               </property>

@@ -1,5 +1,4 @@
 #include "server.h"
-
 Server::Server(){
     if(this->listen(QHostAddress::Any,5000)){
         qWarning() << "Сервер включен";
@@ -25,18 +24,25 @@ void Server::SlotReadyRead(){
         QString str;
         in >> str;
         qWarning() << str;
-        SendToClient(str);
+        path = path + "/" + str;
+        QDir directory(path);
+        // for (const QString &subdir : subdirs) {
+        //     qWarning() << subdir;
+        // }
+        SendToClient(directory.entryList(QDir::Dirs | QDir::Files));
     }
     else{
         qWarning() << "DataStream error";
     }
 }
-void Server::SendToClient(QString str){
+void Server::SendToClient(QStringList subdirs){
     data.clear();
     QDataStream out(&data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_2);
-    out << str;
+    // out << str;
+    out << subdirs;
     for(int i = 0; i < sockets.size();i++){
         sockets[i]->write(data);
     }
+
 }
