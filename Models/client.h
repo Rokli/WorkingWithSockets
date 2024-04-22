@@ -18,6 +18,7 @@ public:
     QVector<QTcpSocket*> sockets;
     QByteArray data;
     Ui::MainWindow *ui;
+    quint16 nextBlockSize;
 
 private:
     QString address;

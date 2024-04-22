@@ -3,7 +3,8 @@
 Client::Client(){
     socket = new QTcpSocket();
     connect(socket, &QTcpSocket::readyRead, this, &Client::ReadyRead);
-    connect(socket,&QTcpSocket::disconnected,socket,&QTcpSocket::deleteLater);
+    nextBlockSize = 0;
+    // connect(socket,&QTcpSocket::disconnected,socket,&QTcpSocket::deleteLater);
 }
 void Client::SetUI(Ui::MainWindow *ui){
        this->ui = ui;
@@ -27,11 +28,29 @@ void Client::ReadyRead(){
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_6_2);
     if(in.status() == QDataStream::Ok){
-        QStringList subdirs;
-        in >> subdirs;
-        for (const QString &subdir : subdirs) {
-            qWarning() << subdir;
-            ui->listWidget->addItem(subdir);
+        // QStringList subdirs;
+        // in >> subdirs;
+        // for (const QString &subdir : subdirs) {
+        //     qWarning() << subdir;
+        //     ui->listWidget->addItem(subdir);
+        // }
+        for(;;){
+            if(nextBlockSize == 0){
+                if(socket->bytesAvailable() < 2){
+                    break;
+                }
+                in >> nextBlockSize;
+            }
+            if(socket->bytesAvailable() < nextBlockSize){
+                break;
+            }
+            QStringList subdirs;
+            in >> subdirs;
+            for (const QString &subdir : subdirs) {
+                qWarning() << subdir;
+                ui->listWidget->addItem(subdir);
+            }
+            nextBlockSize = 0;
         }
 
     }else{
@@ -42,11 +61,14 @@ void Client::SendServer(QString str){
     data.clear();
     QDataStream out(&data,QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_2);
-    out<<str;
+    out<< quint16(0) <<str;
+    out.device()->seek(0);
+    out << quint16(data.size()-sizeof(quint16));
     socket->write(data);
 }
 //TODO:
 //Сделать закрытие связи  между сервером и клиентом
 void Client::CloseConnection(){
-
+    ui->listWidget->clear();
+    socket->disconnectFromHost();
 }

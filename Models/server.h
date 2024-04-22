@@ -13,6 +13,7 @@ public:
     QTcpSocket *socket;
     bool flag;
     QString path;
+    quint16 nextBlockSize;
 private:
     QVector<QTcpSocket*> sockets;
     QByteArray data;
