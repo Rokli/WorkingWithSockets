@@ -117,7 +117,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="clientView"/>
+           <widget class="QTextBrowser" name="clientView"/>
           </item>
          </layout>
         </item>
@@ -131,7 +131,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextBrowser" name="textBrowser"/>
+           <widget class="QTextBrowser" name="serverView"/>
           </item>
          </layout>
         </item>

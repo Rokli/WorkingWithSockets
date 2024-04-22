@@ -6,11 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Server server;
     if(server.flag){
-        ui->textBrowser->append("Сервер включился");
+        ui->serverView->append("Сервер включился");
     }else{
-        ui->textBrowser->append("Сервер не включился");
+        ui->serverView->append("Сервер не включился");
     }
     socket = new QTcpSocket(this);
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::SlotsReadyRead);
@@ -24,8 +23,14 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_pushButton_2_clicked()
-{
-    socket->connectToHost("127.0.0.1",2323);
+{/*
+    socket->connectToHost("127.0.0.1",5000);*/
+    // if (socket->state() == QAbstractSocket::ConnectedState) {
+    //     qWarning() << "Подключился";
+    // } else {
+    //     qWarning() << "Сокет не подключен к серверу." <<socket->errorString();;
+    // }
+
 }
 
 void MainWindow::SlotsReadyRead()
@@ -35,15 +40,16 @@ void MainWindow::SlotsReadyRead()
     if(in.status() == QDataStream::Ok){
         QString str;
         in >> str;
-        ui->textBrowser->append(str);
+        ui->serverView->append(str);
     }else{
-        ui->textBrowser->append("Параша noполучилась");
+        ui->serverView->append("Параша noполучилась");
     }
 }
 
 void MainWindow::SendToServer(QString str)
 {
     data.clear();
+
     QDataStream out(&data,QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_2);
     out<<str;

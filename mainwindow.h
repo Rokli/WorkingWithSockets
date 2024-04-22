@@ -27,6 +27,7 @@ private:
     Ui::MainWindow *ui;
     QTcpSocket *socket;
     QByteArray data;
+    Server server;
 public slots:
     void SlotsReadyRead();
     void SendToServer(QString str);

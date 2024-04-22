@@ -3,6 +3,7 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
+#include <QDebug>
 class Server : public QTcpServer
 {
     Q_OBJECT
@@ -10,12 +11,13 @@ public:
     Server();
     QTcpSocket *socket;
     bool flag;
+
 private:
     QVector<QTcpSocket*> sockets;
     QByteArray data;
     void SendToClient(QString str);
 public slots:
-    void incomingConnection(qintptr socketDescriptor);
+    void incomingConnection(qintptr socketDescriptor)override;
     void SlotReadyRead();
 };
 
